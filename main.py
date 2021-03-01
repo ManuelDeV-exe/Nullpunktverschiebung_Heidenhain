@@ -1,5 +1,10 @@
 from re import search
 
+# Variablen
+
+Planes = []
+
+# Funktionen
 
 def removeNumbers(text):
     wiederholungen = len(text)
@@ -21,7 +26,7 @@ def addNumbers(text):
             text[i] = "0" + text[i]
     return text
 
-def addLBL(text):
+def addLBL50(text):
     for i in range(len(text)):
         if search("PLANE RESET TURN FMAX", text[i]):
             text.insert(i+1," CALL LBL 50 \n")
@@ -30,6 +35,24 @@ def addLBL(text):
         #if search("PLANE RESET TURN FMAX", text[i]):
         #    text.insert(i+1," CALL LBL 50 \n")
     return text
+
+def findPlanes(text, Planes):
+    for i in range(len(text)):
+        if search("PLANE", text[i]):
+            Planes.insert(len(Planes), text[i])
+    PlanesZwischenspeicher = []
+    for i in Planes:
+        if i not in PlanesZwischenspeicher:
+            PlanesZwischenspeicher.append(i)
+    Planes = PlanesZwischenspeicher
+    i=-1
+    for x in range(len(Planes)):
+        i=i+1
+        if x<len(Planes):
+            if search("PLANE RESET TURN", Planes[x]): 
+                Planes.remove(search("PLANE RESET TURN", Planes[i]).string)
+                i=i-1
+    return Planes      
 
 def addEND(text):
     i = len(text)-1
@@ -48,6 +71,8 @@ def DateiSchreiben(DateiPfad, text):
     for i in range(len(text)):
         x.writelines(text[i])
 
+# Abarbeitung Programm
+
 DateiPfad = "test.h"
 
 Datei = open(DateiPfad, 'r')
@@ -55,7 +80,10 @@ text = Datei.readlines()
 Datei.close()
 
 text = removeNumbers(text)
-text = addLBL(text)
+Planes = findPlanes(text, Planes)
+text = addLBL50(text)
 text = addEND(text)
 text = addNumbers(text)
 DateiSchreiben(DateiPfad, text)
+
+# Programm Ende

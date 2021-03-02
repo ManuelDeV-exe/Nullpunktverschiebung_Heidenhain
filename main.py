@@ -30,6 +30,7 @@ def addLBL(text, Planes):
     for i in range(len(Planes)):
         for x in range(len(text)):
             s=0
+            print(x)
             if str(Planes[i]) == str(text[x-s]):
                 LabelNummer = 50 + i
                 text.insert(x+1," CALL LBL " + str(LabelNummer) + "\n")
@@ -84,8 +85,8 @@ Datei.close()
 
 text = removeNumbers(text)
 Planes = findPlanes(text, Planes)
-#text = addLBL(text, Planes)
-#text = addEND(text)
+text = addLBL(text, Planes)
+text = addEND(text)
 text = addNumbers(text)
 DateiSchreiben(DateiPfad, text)
 

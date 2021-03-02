@@ -26,14 +26,16 @@ def addNumbers(text):
             text[i] = "0" + text[i]
     return text
 
-def addLBL50(text):
-    for i in range(len(text)):
-        if search("PLANE RESET TURN FMAX", text[i]):
-            text.insert(i+1," CALL LBL 50 \n")
-        #if search("PLANE RESET TURN FMAX", text[i]):
-        #    text.insert(i+1," CALL LBL 50 \n")
-        #if search("PLANE RESET TURN FMAX", text[i]):
-        #    text.insert(i+1," CALL LBL 50 \n")
+def addLBL(text, Planes):
+    for i in range(len(Planes)):
+        for x in range(len(text)):
+            s=0
+            if str(Planes[i]) == str(text[x-s]):
+                LabelNummer = 50 + i
+                text.insert(x+1," CALL LBL " + str(LabelNummer) + "\n")
+                s=s+1
+
+
     return text
 
 def findPlanes(text, Planes):
@@ -45,21 +47,22 @@ def findPlanes(text, Planes):
         if i not in PlanesZwischenspeicher:
             PlanesZwischenspeicher.append(i)
     Planes = PlanesZwischenspeicher
-    i=-1
-    for x in range(len(Planes)):
-        i=i+1
-        if x<len(Planes):
-            if search("PLANE RESET TURN", Planes[x]): 
-                Planes.remove(search("PLANE RESET TURN", Planes[i]).string)
-                i=i-1
+
+    for i in range(len(Planes)):
+        if search("PLANE RESET TURN", Planes[i]):
+            Planes.pop(i)
     return Planes      
 
 def addEND(text):
-    i = len(text)-1
     Endcode = open("Endcode.h", 'r')
     Endcode = Endcode.readlines()
     lenEndcode = len(Endcode)-1
     Endcode[lenEndcode] = Endcode[lenEndcode] + "\n"
+    text.pop(len(text)-2)
+    text.pop(len(text)-2)
+    text.pop(len(text)-2)
+    text.pop(len(text)-2)
+    i = len(text)-1
     for x in range(len(Endcode)):
         w = x + i
         Endcode[x] = " " + Endcode[x]
@@ -81,8 +84,8 @@ Datei.close()
 
 text = removeNumbers(text)
 Planes = findPlanes(text, Planes)
-text = addLBL50(text)
-text = addEND(text)
+#text = addLBL(text, Planes)
+#text = addEND(text)
 text = addNumbers(text)
 DateiSchreiben(DateiPfad, text)
 

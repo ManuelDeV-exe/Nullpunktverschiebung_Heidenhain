@@ -6,6 +6,8 @@ from re import search
 
 import sys
 from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QIcon
+from PyQt6 import uic
 
 # Variablen
 
@@ -85,11 +87,11 @@ def DateiSchreiben(DateiPfad, text):
 # Abarbeitung Programm
 
 app = QApplication(sys.argv)
-w = loadUi("/Gui/MainWindow.ui")
+w = uic.loadUi("Gui/MainWindow.ui")
 
 w.show()
 
-sys.exit(app.exec_())
+sys.exit(app.exec())
 
 # DateiPfad = "test.h"
 

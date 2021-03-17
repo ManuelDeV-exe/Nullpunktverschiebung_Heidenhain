@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
+# Importieren
+
 from re import search
+
+import sys
+from PyQt6.QtWidgets import *
 
 # Variablen
 
@@ -79,17 +84,24 @@ def DateiSchreiben(DateiPfad, text):
 
 # Abarbeitung Programm
 
-DateiPfad = "test.h"
+app = QApplication(sys.argv)
+w = loadUi("/Gui/MainWindow.ui")
 
-Datei = open(DateiPfad, 'r')
-text = Datei.readlines()
-Datei.close()
+w.show()
 
-text = removeNumbers(text)
-Planes = findPlanes(text, Planes)
-text = addLBL(text, Planes)
-text = addEND(text)
-text = addNumbers(text)
-DateiSchreiben(DateiPfad, text)
+sys.exit(app.exec_())
+
+# DateiPfad = "test.h"
+
+# Datei = open(DateiPfad, 'r')
+# text = Datei.readlines()
+# Datei.close()
+
+# text = removeNumbers(text)
+# Planes = findPlanes(text, Planes)
+# text = addLBL(text, Planes)
+# text = addEND(text)
+# text = addNumbers(text)
+# DateiSchreiben(DateiPfad, text)
 
 # Programm Ende

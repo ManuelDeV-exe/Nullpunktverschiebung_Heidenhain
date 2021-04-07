@@ -84,26 +84,48 @@ def DateiSchreiben(DateiPfad, text):
     for i in range(len(text)):
         x.writelines(text[i])
 
+# GUIFunktionen
+
+def ButtonSelectPath():
+    filepath = QFileDialog.getOpenFileName()
+    w.rawFilePath.setText(filepath[0])
+
+def ProgressBar(Prozent):
+    w.progressBar.setValue(Prozent)
+
+def ButtonStartEditFile():
+    DateiPfad = "test.h"
+    ProgressBar(10)
+    Datei = open(DateiPfad, 'r')
+    text = Datei.readlines()
+    ProgressBar(20)
+    Datei.close()
+
+    # text = removeNumbers(text)
+    ProgressBar(30)
+    # Planes = findPlanes(text, Planes)
+    ProgressBar(40)
+    # text = addLBL(text, Planes)
+    ProgressBar(50)
+    # text = addEND(text)
+    ProgressBar(60)
+    # text = addNumbers(text)
+    ProgressBar(70)
+    # DateiSchreiben(DateiPfad, text)
+    ProgressBar(100)
+
+    w.LabelDone.setVisible(True)
+
 # Abarbeitung Programm
 
 app = QApplication(sys.argv)
 w = uic.loadUi("Gui/MainWindow.ui")
 
+w.LabelDone.setVisible(False)
+w.selectfile_Rawfile.clicked.connect(ButtonSelectPath)
+w.ButtonStartEdit.clicked.connect(ButtonStartEditFile)
+
 w.show()
-
 sys.exit(app.exec())
-
-# DateiPfad = "test.h"
-
-# Datei = open(DateiPfad, 'r')
-# text = Datei.readlines()
-# Datei.close()
-
-# text = removeNumbers(text)
-# Planes = findPlanes(text, Planes)
-# text = addLBL(text, Planes)
-# text = addEND(text)
-# text = addNumbers(text)
-# DateiSchreiben(DateiPfad, text)
 
 # Programm Ende

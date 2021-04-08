@@ -1,20 +1,23 @@
 import sys
+import os
 from cx_Freeze import setup, Executable
 
-# Dependencies are automatically detected, but it might need fine tuning.
-build_exe_options = {"packages": ["os"]}
+# Dateien 
+files = ['Gui/', 'Endcode.h']
 
-# GUI applications require a different base on Windows (the default is for
-# a console application).
-base = None
-if sys.platform == "win32":
-    base = "Win32GUI"
+# Ziel
+target = Executable(
+    script="main.py",
+    base="Win32GUI",
+    icon="Gui/data/favicon.ico"
+)
 
+# Setup CX Freez
 setup( 
     name = "Nullpunkt Bscheißer",
-    version = "0.1",
-    description = "Nullpunkt Bscheißer",
-    options = {"build_exe": build_exe_options},
-    executables = [Executable("main.py", base=base, icon='Gui/data/favicon.ico')]
-    
+    version = "1.1",
+    description = "Nullpunkt Bscheißer für Heidenhain Programme",
+    author= "Manuel Bücherl",
+    options = {'build_exe' : {'include_files' : files}},
+    executables = [target]
     )

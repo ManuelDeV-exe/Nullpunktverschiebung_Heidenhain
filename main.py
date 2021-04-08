@@ -52,7 +52,8 @@ def addLBL(text, Planes, InfoTexte):
         number = 50 + i
         text.insert(len(text)-1, NullpunktLBL[0] + str(number) + " ; " + Planes[i])
         text.insert(len(text)-1, " ; " + InfoTexte[i])
-        text.insert(len(text)-1, NullpunktLBL[1] + "\n")
+        if number != 50:
+            text.insert(len(text)-1, NullpunktLBL[1] + "\n")
         text.insert(len(text)-1, NullpunktLBL[2] + "\n")
         text.insert(len(text)-1, NullpunktLBL[3] + "\n")
         text.insert(len(text)-1, NullpunktLBL[4] + "\n")
@@ -136,7 +137,7 @@ def ButtonStartEditFile():
     ProgressBar(40)
     Planes = findPlanes(text)
     InfoTexte = Planes[1]
-    InfoTexte.insert(0, "Nullpunkt zurücksetzen")
+    InfoTexte.insert(0, "Nullpunkt zurücksetzen \n")
     Planes = Planes[0]
     ProgressBar(50)
     text = addLBL(text, Planes, InfoTexte)

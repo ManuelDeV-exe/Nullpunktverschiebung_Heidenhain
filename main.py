@@ -125,6 +125,14 @@ def ButtonStartEditFile():
         e.ErrorText.setText("Bitte eine Datei selektieren!")
         e.show()
         return
+    if search(".H", DateiPfad):
+        pass
+    elif search(".h", DateiPfad):
+        pass
+    else:
+        e.ErrorText.setText("Bitte gib eine gültige Datei an. Endung = .h oder .H")
+        e.show()
+        return
     ProgressBar(10)
     Datei = open(DateiPfad, 'r')
     text = Datei.readlines()

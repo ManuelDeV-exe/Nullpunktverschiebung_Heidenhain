@@ -7,6 +7,7 @@ from re import search
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QIcon
+from PyQt6 import QtCore
 from PyQt6 import uic
 
 # Variablen
@@ -49,7 +50,8 @@ def addLBL(text, Planes, InfoTexte):
 
     for i in range(len(Planes)):
         number = 50 + i
-        text.insert(len(text)-1, NullpunktLBL[0] + str(number) + " ; " + InfoTexte[i])
+        text.insert(len(text)-1, NullpunktLBL[0] + str(number) + " ; " + Planes[i])
+        text.insert(len(text)-1, " ; " + InfoTexte[i])
         text.insert(len(text)-1, NullpunktLBL[1] + "\n")
         text.insert(len(text)-1, NullpunktLBL[2] + "\n")
         text.insert(len(text)-1, NullpunktLBL[3] + "\n")
@@ -117,7 +119,11 @@ def ProgressBar(Prozent):
     w.progressBar.setValue(Prozent)
 
 def ButtonStartEditFile():
-    DateiPfad = "test.h"
+    DateiPfad = w.rawFilePath.text()
+    if DateiPfad == "":
+        e.ErrorText.setText("Bitte eine Datei selektieren!")
+        e.show()
+        return
     ProgressBar(10)
     Datei = open(DateiPfad, 'r')
     text = Datei.readlines()
@@ -142,14 +148,20 @@ def ButtonStartEditFile():
 
     w.LabelDone.setVisible(True)
 
+def ClosseErrorWindow():
+    e.close()
+
 # Abarbeitung Programm
 
 app = QApplication(sys.argv)
 w = uic.loadUi("Gui/MainWindow.ui")
+e = uic.loadUi("Gui/Error.ui")
 
 w.LabelDone.setVisible(False)
 w.selectfile_Rawfile.clicked.connect(ButtonSelectPath)
 w.ButtonStartEdit.clicked.connect(ButtonStartEditFile)
+
+e.ErrorOkButton.clicked.connect(ClosseErrorWindow)
 
 w.show()
 sys.exit(app.exec())

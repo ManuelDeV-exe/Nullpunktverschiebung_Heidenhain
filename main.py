@@ -19,11 +19,6 @@ NullpunktLBL = [" LBL ", " CALL LBL 50", " CYCL DEF 7.0 NULLPUNKT", " CYCL DEF 7
 
 # Funktionen
 
-def resource_path(relative_path):
-        if hasattr(sys, '_MEIPASS'):
-            return os.path.join(sys._MEIPASS, relative_path)
-        return os.path.join(os.path.abspath("."), relative_path)
-
 def removeNumbers(text):
     wiederholungen = len(text)
     for i in range(wiederholungen):
@@ -155,16 +150,6 @@ def ButtonStartEditFile():
 
 def ClosseErrorWindow():
     e.close()
-
-# Resource Dateien
-
-resource_path('Gui/Einstellungen.ui')
-resource_path('Gui/Error.ui')
-resource_path('Gui/Icons.ui')
-resource_path('Gui/MainWindow.ui')
-resource_path('Gui/data/favicon.ico')
-resource_path('Gui/data/Icon.jpg')
-
 
 # Abarbeitung Programm
 

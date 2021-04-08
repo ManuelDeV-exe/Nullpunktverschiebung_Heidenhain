@@ -4,7 +4,7 @@
 
 from re import search
 
-import sys
+import sys, os
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QIcon
 from PyQt6 import QtCore
@@ -18,6 +18,11 @@ InfoTexte = []
 NullpunktLBL = [" LBL ", " CALL LBL 50", " CYCL DEF 7.0 NULLPUNKT", " CYCL DEF 7.1  X+0", " CYCL DEF 7.1  Y+0", " CYCL DEF 7.1  Z+0", " LBL 0"]
 
 # Funktionen
+
+def resource_path(relative_path):
+        if hasattr(sys, '_MEIPASS'):
+            return os.path.join(sys._MEIPASS, relative_path)
+        return os.path.join(os.path.abspath("."), relative_path)
 
 def removeNumbers(text):
     wiederholungen = len(text)
@@ -150,6 +155,16 @@ def ButtonStartEditFile():
 
 def ClosseErrorWindow():
     e.close()
+
+# Resource Dateien
+
+resource_path('Gui/Einstellungen.ui')
+resource_path('Gui/Error.ui')
+resource_path('Gui/Icons.ui')
+resource_path('Gui/MainWindow.ui')
+resource_path('Gui/data/favicon.ico')
+resource_path('Gui/data/Icon.jpg')
+
 
 # Abarbeitung Programm
 

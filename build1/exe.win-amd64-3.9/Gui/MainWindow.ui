@@ -41,10 +41,6 @@
   <property name="windowTitle">
    <string>Nullpunkt Bscheißer</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>data/Icon.jpg</normaloff>data/Icon.jpg</iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(75, 75, 75)</string>
   </property>
@@ -232,7 +228,7 @@ border: 3px solid #FFF</string>
 </string>
     </property>
     <property name="text">
-     <string>Done</string>
+     <string>Fertig</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>

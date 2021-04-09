@@ -6,7 +6,7 @@ from re import search
 
 import sys, os
 from PyQt6.QtWidgets import *
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import *
 from PyQt6 import QtCore
 from PyQt6 import uic
 
@@ -15,7 +15,11 @@ from PyQt6 import uic
 Planes = []
 InfoTexte = []
 
-NullpunktLBL = [" LBL ", " CALL LBL 50", " CYCL DEF 7.0 NULLPUNKT", " CYCL DEF 7.1  X+0", " CYCL DEF 7.1  Y+0", " CYCL DEF 7.1  Z+0", " LBL 0"]
+amEndeEntfernen = 6
+
+NullpunktLBL = [" LBL ", " CALL LBL 50", " CYCL DEF 7.0 NULLPUNKT", " CYCL DEF 7.1  X+0", " CYCL DEF 7.2  Y+0", " CYCL DEF 7.3  Z+0", " LBL 0"]
+EndcodeTXT = [" L Z+0 R0 FMAX M92 M9", " L X+0 Y+0 R0 FMAX M92", " STOP M36 M30", " ;"]
+
 
 # Funktionen
 
@@ -90,19 +94,15 @@ def findPlanes(text):
     return planesVar, infotext   
 
 def addEND(text):
-    Endcode = open("Endcode.h", 'r')
-    Endcode = Endcode.readlines()
-    lenEndcode = len(Endcode)-1
-    Endcode[lenEndcode] = Endcode[lenEndcode] + "\n"
-    text.pop(len(text)-2)
-    text.pop(len(text)-2)
-    text.pop(len(text)-2)
-    text.pop(len(text)-2)
+
+    for i in range(amEndeEntfernen):
+        text.pop(len(text)-2)
+
     i = len(text)-1
-    for x in range(len(Endcode)):
+    for x in range(len(EndcodeTXT)):
         w = x + i
-        Endcode[x] = " " + Endcode[x]
-        text.insert(w, Endcode[x])
+        EndcodeTXT[x] = " " + EndcodeTXT[x] + "\n"
+        text.insert(w, EndcodeTXT[x])
     return text
 
 def DateiSchreiben(DateiPfad, text):
@@ -165,6 +165,9 @@ def ClosseErrorWindow():
 app = QApplication(sys.argv)
 w = uic.loadUi("Gui/MainWindow.ui")
 e = uic.loadUi("Gui/Error.ui")
+
+w.setWindowIcon(QIcon('Gui/data/favicon.ico')) 
+e.setWindowIcon(QIcon('Gui/data/favicon.ico')) 
 
 w.LabelDone.setVisible(False)
 w.selectfile_Rawfile.clicked.connect(ButtonSelectPath)

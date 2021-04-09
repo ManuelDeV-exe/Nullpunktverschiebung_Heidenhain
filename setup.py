@@ -3,7 +3,7 @@ import os
 from cx_Freeze import setup, Executable
 
 # Dateien 
-files = ['Gui/', 'Endcode.h']
+files = ['Gui/']
 
 # Build Optionen
 build_exe_options = {'include_files' : files}

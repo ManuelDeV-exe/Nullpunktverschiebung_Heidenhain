@@ -32,6 +32,9 @@
     <pointsize>12</pointsize>
    </font>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="contextMenuPolicy">
    <enum>Qt::NoContextMenu</enum>
   </property>
@@ -123,7 +126,7 @@ border: 1.5px solid #FFF</string>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="selectfile_Rawfile">
+      <widget class="QPushButton" name="btn_selectfile">
        <property name="font">
         <font>
          <family>Tahoma</family>
@@ -147,7 +150,7 @@ border: 3px solid #FFF</string>
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="ButtonStartEdit">
+   <widget class="QPushButton" name="btn_ButtonStart">
     <property name="geometry">
      <rect>
       <x>430</x>
@@ -240,6 +243,34 @@ border: 3px solid #FFF</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_Einstellungen">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>190</y>
+      <width>201</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>15</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(50, 50, 50);
+color: rgb(255, 255, 255);
+border-radius: 6px;
+border: 3px solid #FFF</string>
+    </property>
+    <property name="text">
+     <string>Einstellungen</string>
     </property>
    </widget>
   </widget>

@@ -10,6 +10,7 @@ from PyQt6.QtGui import *
 from PyQt6 import QtCore
 from PyQt6 import uic
 from pathlib import Path
+from configparser import ConfigParser
 
 # Variablen
 
@@ -116,24 +117,27 @@ def DateiSchreiben(DateiPfad, text):
 
 def ButtonSelectPath():
     filepath = QFileDialog.getOpenFileName()
-    w.rawFilePath.setText(filepath[0])
+    MainWindow.rawFilePath.setText(filepath[0])
+
+def ButtonOpenEinstellungen():
+    EinstellungenWindow.show()
 
 def ProgressBar(Prozent):
-    w.progressBar.setValue(Prozent)
+    MainWindow.progressBar.setValue(Prozent)
 
 def ButtonStartEditFile():
-    DateiPfad = w.rawFilePath.text()
+    DateiPfad = MainWindow.rawFilePath.text()
     if DateiPfad == "":
-        e.ErrorText.setText("Bitte eine Datei selektieren!")
-        e.show()
+        ErrorWindow.ErrorText.setText("Bitte eine Datei selektieren!")
+        ErrorWindow.show()
         return
     if search(".H", DateiPfad):
         pass
     elif search(".h", DateiPfad):
         pass
     else:
-        e.ErrorText.setText("Bitte gib eine gültige Datei an. Endung = .h oder .H")
-        e.show()
+        ErrorWindow.ErrorText.setText("Bitte gib eine gültige Datei an. Endung = .h oder .H")
+        ErrorWindow.show()
         return
     ProgressBar(10)
     Datei = open(DateiPfad, 'r')
@@ -157,30 +161,60 @@ def ButtonStartEditFile():
     DateiSchreiben(DateiPfad, text)
     ProgressBar(100)
 
-    w.LabelDone.setVisible(True)
+    MainWindow.LabelDone.setVisible(True)
 
 def ClosseErrorWindow():
-    e.close()
+    ErrorWindow.close()
 
-# Abarbeitung Programm
+def BackToMainWindow():
+    # Code ob sicher nicht speichern
+    EinstellungenWindow.close()
 
+def SaveEinstllungen():
+    # Code zum Speichern
+    EinstellungenWindow.close()
+
+# Config Funktionen
+def CheckAndChangeEinstellungen():
+    if config['Einstellungen']['point1'] == "false":
+        EndcodHinzu.checked(False)
+    if config['Einstellungen']['point2'] == "false":
+        EndcodHinzu.checked(False)
+    print('test')
+        
+
+# Abarbeitung Programm ---------------------------
+
+# Config -----------------------
+config = ConfigParser()
+config.read('config.ini')
+CheckAndChangeEinstellungen()
+
+# zuweißung der fenster
 app = QApplication(sys.argv)
-w = uic.loadUi("Gui/MainWindow.ui")
-e = uic.loadUi("Gui/Error.ui")
+MainWindow = uic.loadUi("Gui/MainWindow.ui")
+ErrorWindow = uic.loadUi("Gui/Error.ui")
+EinstellungenWindow = uic.loadUi("Gui/EinstellungenWindow.ui")
 
-print(Path(__file__))
+# Zuweißung Icons
+MainWindow.setWindowIcon(QIcon(logo_Pfad)) 
+ErrorWindow.setWindowIcon(QIcon(logo_Pfad)) 
+EinstellungenWindow.setWindowIcon(QIcon(logo_Pfad))
 
-w.setWindowIcon(QIcon(logo_Pfad)) 
-e.setWindowIcon(QIcon(logo_Pfad)) 
+    # MainWindow Funktionen
+MainWindow.LabelDone.setVisible(False) # Fertig text verstecken
+MainWindow.btn_selectfile.clicked.connect(ButtonSelectPath) # Dateiauswahl
 
+MainWindow.btn_ButtonStart.clicked.connect(ButtonStartEditFile) # Start verknüpfung
+MainWindow.btn_Einstellungen.clicked.connect(ButtonOpenEinstellungen) # Einstellungen verknüpfung
 
-w.LabelDone.setVisible(False)
-w.selectfile_Rawfile.clicked.connect(ButtonSelectPath)
-w.ButtonStartEdit.clicked.connect(ButtonStartEditFile)
+    # Error Window Funktionen
+ErrorWindow.ErrorOkButton.clicked.connect(ClosseErrorWindow) # Close Errow window
 
-e.ErrorOkButton.clicked.connect(ClosseErrorWindow)
+    # Einstellungen Funktionen
+EinstellungenWindow.btn_backToMain.clicked.connect(BackToMainWindow) # Back to Main Menü
+EinstellungenWindow.btn_SaveEinstllungen.clicked.connect(BackToMainWindow) # Save and Back to Main menü
 
-w.show()
-sys.exit(app.exec())
-
+MainWindow.show() # main window öffnen
+sys.exit(app.exec()) # alles beenden
 # Programm Ende

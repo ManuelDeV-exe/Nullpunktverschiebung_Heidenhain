@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Einstellungen</string>
+   <string>Nullpunkt Bscheißer | Einstellungen</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(75, 75, 75)</string>
@@ -85,6 +85,8 @@ border: 3px solid #FFF</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

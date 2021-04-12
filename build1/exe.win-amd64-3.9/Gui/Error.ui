@@ -46,10 +46,6 @@
   <property name="windowTitle">
    <string>Nullpunkt Bscheißer | Error Massage</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>data/Icon.jpg</normaloff>data/Icon.jpg</iconset>
-  </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(75, 75, 75);</string>
   </property>

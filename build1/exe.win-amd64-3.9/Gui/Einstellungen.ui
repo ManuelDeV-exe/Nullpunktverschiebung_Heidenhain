@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Einstellungen</string>
+   <string>Nullpunkt Bscheißer | Einstellungen</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(75, 75, 75)</string>
@@ -68,7 +68,25 @@ border: 3px solid #FFF</string>
     <string>OK</string>
    </property>
   </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>30</y>
+     <width>70</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add Endcode</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

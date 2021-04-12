@@ -41,6 +41,11 @@
   <property name="windowTitle">
    <string>Nullpunkt Bscheißer</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <selectedon>:/Icon/data/favicon.ico</selectedon>
+   </iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color:rgb(75, 75, 75)</string>
   </property>

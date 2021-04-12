@@ -9,9 +9,11 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from PyQt6 import QtCore
 from PyQt6 import uic
+from pathlib import Path
 
 # Variablen
 
+logo_Pfad = 'G:\\#Projekte\\Nullpunktverschiebung_Heidenhain\\Gui\\data\\Icon.png'
 Planes = []
 InfoTexte = []
 
@@ -166,8 +168,11 @@ app = QApplication(sys.argv)
 w = uic.loadUi("Gui/MainWindow.ui")
 e = uic.loadUi("Gui/Error.ui")
 
-w.setWindowIcon(QIcon('Gui/data/favicon.ico')) 
-e.setWindowIcon(QIcon('Gui/data/favicon.ico')) 
+print(Path(__file__))
+
+w.setWindowIcon(QIcon(logo_Pfad)) 
+e.setWindowIcon(QIcon(logo_Pfad)) 
+
 
 w.LabelDone.setVisible(False)
 w.selectfile_Rawfile.clicked.connect(ButtonSelectPath)

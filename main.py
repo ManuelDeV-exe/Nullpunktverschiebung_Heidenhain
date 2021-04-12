@@ -170,25 +170,29 @@ def BackToMainWindow():
     # Code ob sicher nicht speichern
     EinstellungenWindow.close()
 
-def SaveEinstllungen():
-    # Code zum Speichern
+def SaveEinstllungen(config_file):
+    if EinstellungenWindow.EndcodHinzu.isChecked() == False:
+        config.set('Einstellungen', 'point1', 'false')
+    else:
+        config.set('Einstellungen', 'point1', 'true')
+    
+    if EinstellungenWindow.endcodetest.isChecked() == False:
+        config.set('Einstellungen', 'point2', 'false')
+    else:
+        config.set('Einstellungen', 'point2', 'true')
+
+    with open('config.ini', 'w') as configfile:
+        config.write(configfile)
     EinstellungenWindow.close()
 
 # Config Funktionen
 def CheckAndChangeEinstellungen():
     if config['Einstellungen']['point1'] == "false":
-        EndcodHinzu.checked(False)
+        EinstellungenWindow.EndcodHinzu.setChecked(False)
     if config['Einstellungen']['point2'] == "false":
-        EndcodHinzu.checked(False)
-    print('test')
+        EinstellungenWindow.endcodetest.setChecked(False)
         
-
 # Abarbeitung Programm ---------------------------
-
-# Config -----------------------
-config = ConfigParser()
-config.read('config.ini')
-CheckAndChangeEinstellungen()
 
 # zuweißung der fenster
 app = QApplication(sys.argv)
@@ -200,6 +204,11 @@ EinstellungenWindow = uic.loadUi("Gui/EinstellungenWindow.ui")
 MainWindow.setWindowIcon(QIcon(logo_Pfad)) 
 ErrorWindow.setWindowIcon(QIcon(logo_Pfad)) 
 EinstellungenWindow.setWindowIcon(QIcon(logo_Pfad))
+
+# Config -----------------------
+config = ConfigParser()
+config.read('config.ini')
+CheckAndChangeEinstellungen()
 
     # MainWindow Funktionen
 MainWindow.LabelDone.setVisible(False) # Fertig text verstecken
@@ -213,7 +222,7 @@ ErrorWindow.ErrorOkButton.clicked.connect(ClosseErrorWindow) # Close Errow windo
 
     # Einstellungen Funktionen
 EinstellungenWindow.btn_backToMain.clicked.connect(BackToMainWindow) # Back to Main Menü
-EinstellungenWindow.btn_SaveEinstllungen.clicked.connect(BackToMainWindow) # Save and Back to Main menü
+EinstellungenWindow.btn_SaveEinstllungen.clicked.connect(SaveEinstllungen) # Save and Back to Main menü
 
 MainWindow.show() # main window öffnen
 sys.exit(app.exec()) # alles beenden

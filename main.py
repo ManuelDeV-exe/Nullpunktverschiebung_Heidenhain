@@ -181,7 +181,7 @@ def SaveEinstllungen(config_file):
     else:
         config.set('Einstellungen', 'point2', 'true')
 
-    with open('config.ini', 'w') as configfile:
+    with open(configfile_pfad, 'w') as configfile:
         config.write(configfile)
     EinstellungenWindow.close()
 
@@ -206,8 +206,9 @@ ErrorWindow.setWindowIcon(QIcon(logo_Pfad))
 EinstellungenWindow.setWindowIcon(QIcon(logo_Pfad))
 
 # Config -----------------------
+configfile_pfad = 'config/config.ini'
 config = ConfigParser()
-config.read('config.ini')
+config.read(configfile_pfad)
 CheckAndChangeEinstellungen()
 
     # MainWindow Funktionen

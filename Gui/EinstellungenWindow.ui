@@ -9,9 +9,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>489</width>
+    <height>410</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>489</width>
+    <height>410</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>489</width>
+    <height>410</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Nullpunkt Bscheißer | Einstellungen</string>
@@ -25,9 +37,9 @@
   <widget class="QPushButton" name="btn_backToMain">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>240</y>
-     <width>191</width>
+     <x>30</x>
+     <y>360</y>
+     <width>221</width>
      <height>41</height>
     </rect>
    </property>
@@ -51,9 +63,9 @@ border: 3px solid #FFF</string>
   <widget class="QPushButton" name="btn_SaveEinstllungen">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>240</y>
-     <width>181</width>
+     <x>260</x>
+     <y>360</y>
+     <width>201</width>
      <height>41</height>
     </rect>
    </property>
@@ -91,6 +103,9 @@ border: 3px solid #FFF</string>
      <bold>true</bold>
     </font>
    </property>
+   <property name="toolTip">
+    <string>Alle Achsen auf M92 fahren und Türen öffnen</string>
+   </property>
    <property name="styleSheet">
     <string notr="true">color: #FFF</string>
    </property>
@@ -101,13 +116,13 @@ border: 3px solid #FFF</string>
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QCheckBox" name="endcodetest">
+  <widget class="QCheckBox" name="SchwenkTexte">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>331</width>
-     <height>17</height>
+     <width>381</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -122,7 +137,81 @@ border: 3px solid #FFF</string>
     <string notr="true">color: #FFF</string>
    </property>
    <property name="text">
-    <string>Endcode hinzufügen</string>
+    <string>Schwenktexte in LBL aufruf einfügen</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="PostOrdner">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>300</y>
+     <width>471</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: #FFF;
+color: #000;
+padding: 2px;
+border-radius: 6px;
+border: 1.5px solid #FFF</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>270</y>
+     <width>221</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #FFF</string>
+   </property>
+   <property name="text">
+    <string>Standart Postordner</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="withoutNumbers">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>381</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #FFF</string>
+   </property>
+   <property name="text">
+    <string>Zahlen weglassen</string>
    </property>
    <property name="checked">
     <bool>true</bool>

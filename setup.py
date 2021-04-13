@@ -2,11 +2,8 @@ import sys
 import os
 from cx_Freeze import setup, Executable
 
-# Dateien 
-files = ['Gui/', 'config/']
-
 # Build Optionen
-build_exe_options = {'include_files' : files}
+build_exe_options = dict(packages = ["configparser", "pathlib", "PyQt6", "sys", "os"], excludes = [], include_files = ["Gui/","config/"]) #dict(includefiles)
 
 # Ziel
 target = Executable(

@@ -191,6 +191,8 @@ def ButtonStartEditFile():
     if cf_Endcode == "true":
         text = addEND(text)
         ProgressBar(40)
+    else:
+        text = addEND(text)
     
     Planes = findPlanes(text)
     InfoTexte = Planes[1]

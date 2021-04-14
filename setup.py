@@ -3,7 +3,7 @@ import os
 from cx_Freeze import setup, Executable
 
 # Build Optionen
-build_exe_options = dict(packages = ["configparser", "pathlib", "PyQt6", "sys", "os"], excludes = [], include_files = ["Gui/","config/"]) #dict(includefiles)
+build_exe_options = dict(packages = ["configparser", "pathlib", "PyQt6", "sys", "os"], excludes = [], include_files = ["Gui/","config/"])
 
 # Ziel
 target = Executable(

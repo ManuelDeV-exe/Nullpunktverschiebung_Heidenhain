@@ -14,20 +14,15 @@ from configparser import ConfigParser
 
 homePath = os.path.dirname(__file__) # Ansonsten wird kein Icon angezeigt
 logo_Pfad = os.path.join(homePath, 'Gui\\data\\Icon.png')
-global Planes
-global InfoTexte
-global text
-global EndcodeTXT
-global EndcodeTxtOriginal
+
 Planes = []
 InfoTexte = []
 text = []
 EndcodeTXT = []
-EndcodeTxtOriginal = []
+lastLineInFile = ""
 
 NullpunktLBL = [" LBL ", " CALL LBL 50", " CYCL DEF 7.0 NULLPUNKT", " CYCL DEF 7.1  X+0", " CYCL DEF 7.2  Y+0", " CYCL DEF 7.3  Z+0", " LBL 0"]
-EndcodeTxtOriginal = ["L Z+0 R0 FMAX M92 M9", "L X+0 Y+0 R0 FMAX M92", "STOP M36 M30", ";"]
-EndcodeTXT = EndcodeTxtOriginal
+EndcodeTXT = ["L Z+0 R0 FMAX M92 M9\n", "L X+0 Y+0 R0 FMAX M92\n", "STOP M36 M30\n", ";\n"]
 
 # Funktionen Programmlogic
 
@@ -91,11 +86,6 @@ def findPlanes(text):
     infotext = []
     
     for i in range(len(text)):
-        if "END PGM" in text[i]:
-            EndcodeTXT.insert(len(EndcodeTXT), text[i])
-            for x in range(len(EndcodeTXT)):
-                EndcodeTXT[x] = EndcodeTXT[x].replace('\n', '')
-
         if "PLANE" in text[i]:
             planesVar.insert(len(planesVar), text[i])
             
@@ -117,12 +107,6 @@ def findPlanes(text):
             planesVar.pop(i)
     return planesVar, infotext   
 
-def newEndcodeTxt():
-    del EndcodeTXT[:]
-    EndcodeTXT = EndcodeTxtOriginal
-    for i in range(len(EndcodeTxtOriginal)):
-        EndcodeTxt[i] = EndcodeTxtOriginal[i]
-
 def addEND(text):
     stop = 0
     while stop < 1:
@@ -133,11 +117,13 @@ def addEND(text):
             text.pop(len(text)-2)
             stop = 0
 
+    for x in range(len(EndcodeTXT)):
+        EndcodeTXT[x] = EndcodeTXT[x].replace('\n', '')
+
     i = len(text)-1
     for x in range(len(EndcodeTXT)):
         w = x + i
-        EndcodeTXT[x] = " " + EndcodeTXT[x] + "\n"
-        text.insert(w, EndcodeTXT[x])
+        text.insert(w, " " + EndcodeTXT[x] + "\n")
     return text
 
 def DateiSchreiben(DateiPfad, text):
@@ -286,15 +272,15 @@ def ReadConfigfile():
 
 # Abarbeitung Programm ---------------------------
 
-configfile_pfad = homePath + '/config/config.ini'
+configfile_pfad = 'config/config.ini'
 config = ConfigParser()
 config.read(configfile_pfad)
 
 # zuweißung der fenster
 app = QApplication(sys.argv)
-MainWindow = uic.loadUi(homePath + "/Gui/MainWindow.ui")
-ErrorWindow = uic.loadUi(homePath + "/Gui/Error.ui")
-EinstellungenWindow = uic.loadUi(homePath + "/Gui/EinstellungenWindow.ui")
+MainWindow = uic.loadUi("Gui/MainWindow.ui")
+ErrorWindow = uic.loadUi("Gui/Error.ui")
+EinstellungenWindow = uic.loadUi("Gui/EinstellungenWindow.ui")
 
 # Zuweißung Icons
 MainWindow.setWindowIcon(QIcon(logo_Pfad)) 

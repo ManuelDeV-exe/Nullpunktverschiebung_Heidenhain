@@ -9,11 +9,16 @@ from PyQt6 import QtCore
 from PyQt6 import uic
 from pathlib import Path
 from configparser import ConfigParser
+import shutil
+import time
 
 # Variablen
 
 homePath = os.path.dirname(__file__) # Ansonsten wird kein Icon angezeigt
 logo_Pfad = os.path.join(homePath, 'Gui\\data\\Icon.png')
+AppdataPath = os.getenv('APPDATA') + '/Nullpunkt Bscheißer/config'
+AppdataPath = Path(AppdataPath)
+configfile_pfad = Path(str(AppdataPath) + '/config.ini')
 
 Planes = []
 InfoTexte = []
@@ -272,15 +277,21 @@ def ReadConfigfile():
 
 # Abarbeitung Programm ---------------------------
 
-configfile_pfad = 'config/config.ini'
-config = ConfigParser()
-config.read(configfile_pfad)
-
 # zuweißung der fenster
 app = QApplication(sys.argv)
 MainWindow = uic.loadUi("Gui/MainWindow.ui")
 ErrorWindow = uic.loadUi("Gui/Error.ui")
 EinstellungenWindow = uic.loadUi("Gui/EinstellungenWindow.ui")
+
+# Abfragen zwegs config datei
+if os.path.exists(AppdataPath) != True:
+    os.makedirs(AppdataPath)
+    shutil.copy('config/config.ini', str(AppdataPath))
+if os.path.exists(configfile_pfad) != True:
+    shutil.copy('config/config.ini', str(AppdataPath))
+
+config = ConfigParser()
+config.read(configfile_pfad)
 
 # Zuweißung Icons
 MainWindow.setWindowIcon(QIcon(logo_Pfad)) 
@@ -305,5 +316,6 @@ EinstellungenWindow.btn_backToMain.clicked.connect(BackToMainWindow) # Back to M
 EinstellungenWindow.btn_SaveEinstllungen.clicked.connect(SaveEinstllungen) # Save and Back to Main menü
 
 MainWindow.show() # main window öffnen
+MainWindow.activateWindow()
 sys.exit(app.exec()) # alles beenden
 # Programm Ende

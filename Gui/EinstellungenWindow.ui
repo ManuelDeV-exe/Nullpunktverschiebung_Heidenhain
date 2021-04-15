@@ -39,8 +39,8 @@
     <rect>
      <x>30</x>
      <y>360</y>
-     <width>221</width>
-     <height>41</height>
+     <width>200</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="font">
@@ -63,10 +63,10 @@ border: 3px solid #FFF</string>
   <widget class="QPushButton" name="btn_SaveEinstllungen">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>240</x>
      <y>360</y>
-     <width>201</width>
-     <height>41</height>
+     <width>200</width>
+     <height>40</height>
     </rect>
    </property>
    <property name="font">
@@ -90,9 +90,9 @@ border: 3px solid #FFF</string>
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
+     <y>10</y>
      <width>331</width>
-     <height>17</height>
+     <height>60</height>
     </rect>
    </property>
    <property name="font">
@@ -110,7 +110,8 @@ border: 3px solid #FFF</string>
     <string notr="true">color: #FFF</string>
    </property>
    <property name="text">
-    <string>Endcode hinzufügen</string>
+    <string>Schlusscode am 
+ Programmende hinzufügen</string>
    </property>
    <property name="checked">
     <bool>true</bool>
@@ -120,7 +121,7 @@ border: 3px solid #FFF</string>
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>50</y>
+     <y>70</y>
      <width>381</width>
      <height>21</height>
     </rect>
@@ -194,9 +195,9 @@ border: 1.5px solid #FFF</string>
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>80</y>
+     <y>100</y>
      <width>381</width>
-     <height>21</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
@@ -211,10 +212,63 @@ border: 1.5px solid #FFF</string>
     <string notr="true">color: #FFF</string>
    </property>
    <property name="text">
-    <string>Zahlen weglassen</string>
+    <string>Programm neu Nummerieren</string>
    </property>
    <property name="checked">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="LblNachM30">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>381</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: #FFF</string>
+   </property>
+   <property name="text">
+    <string>Korrektur LBL nach M30 einfügen</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_SaveEinstllungen_2">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>250</y>
+     <width>201</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Tahoma</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(50, 50, 50);
+color: rgb(255, 255, 255);
+padding: 5px;
+border-radius: 6px;
+border: 3px solid #FFF</string>
+   </property>
+   <property name="text">
+    <string>Alte Config Laden</string>
    </property>
   </widget>
  </widget>

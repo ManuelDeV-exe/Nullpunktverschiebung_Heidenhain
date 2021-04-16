@@ -119,6 +119,9 @@
          <pointsize>15</pointsize>
         </font>
        </property>
+       <property name="cursor">
+        <cursorShape>ForbiddenCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">background-color: #FFF;
 color: #000;

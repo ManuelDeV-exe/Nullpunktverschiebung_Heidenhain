@@ -156,13 +156,14 @@ def main():
     def addEND(text):
         stop = 0
         counter = 0
+        textBackupTemp = text
         while stop < 1:
             counter = counter + 1
             if counter > 10:
                 ErrorWindow.ErrorText.setText("Die datei kann nicht bearbeitet werden da M30 fehlt \noder die Datei sonstige fehler aufweißt.")
                 ErrorWindow.show()
                 ProgressBar(0)
-                return 
+                return stop
             if "M05" in text[len(text)-1] or "M5" in text[len(text)-1]:
                 stop = 2
             else:
@@ -210,7 +211,7 @@ def main():
         if DateiPfad == "":
             ErrorWindow.ErrorText.setText("Bitte eine Datei selektieren!")
             ErrorWindow.show()
-            return
+            return 
         if ".H" in DateiPfad:
             pass
         elif ".h" in DateiPfad:
@@ -246,6 +247,8 @@ def main():
 
         if cf_Endcode == "true":
             text = addEND(text)
+            if text == 0:
+                return
         else:
             stop = 0
             counter = 0
@@ -288,6 +291,12 @@ def main():
         # Code ob sicher nicht speichern
         EinstellungenWindow.close()
 
+    def SaveConfig():
+        pass
+
+    def LoadConfig():
+        pass
+
     # Config Funktionen -----------------------
 
     def SaveEinstllungen(config_file):
@@ -311,6 +320,11 @@ def main():
         else:
             config.set('Einstellungen', 'LblNachM30', 'true')
         
+        if EinstellungenWindow.InfotexVorToolCall.isChecked() == False:
+            config.set('Einstellungen', 'InfotexVorToolCall', 'false')
+        else:
+            config.set('Einstellungen', 'InfotexVorToolCall', 'true')
+        
         if EinstellungenWindow.PostOrdner.text() == "":
             EinstellungenWindow.PostOrdner.setText(cf_PostOrdner)
             ErrorWindow.ErrorText.setText("Ausgabepfad darf nicht leer sein!")
@@ -332,6 +346,8 @@ def main():
             EinstellungenWindow.withoutNumbers.setChecked(False)
         if cf_LblNachM30 == "false":
             EinstellungenWindow.LblNachM30.setChecked(False)
+        if cf_InfotexVorToolCall == "false":
+            EinstellungenWindow.InfotexVorToolCall.setChecked(False)
         if cf_PostOrdner == "":
             config.set('Pfade', 'PostOrdner', "C:/")
             ReadConfigfile()
@@ -345,6 +361,7 @@ def main():
         global cf_SchwenkTexte
         global cf_withoutNumbers
         global cf_LblNachM30
+        global cf_InfotexVorToolCall
         global cf_PostOrdner
 
         #  Zuweißen
@@ -352,6 +369,7 @@ def main():
         cf_SchwenkTexte = config['Einstellungen']['SchwenkTexte']
         cf_withoutNumbers = config['Einstellungen']['withoutNumbers']
         cf_LblNachM30 = config['Einstellungen']['LblNachM30']
+        cf_InfotexVorToolCall = config['Einstellungen']['InfotexVorToolCall']
         cf_PostOrdner = config['Pfade']['PostOrdner'] 
 
     def saveConfigFile(configfile_pfad):
@@ -396,6 +414,8 @@ def main():
         # Einstellungen Funktionen
     EinstellungenWindow.btn_backToMain.clicked.connect(BackToMainWindow) # Back to Main Menü
     EinstellungenWindow.btn_SaveEinstllungen.clicked.connect(SaveEinstllungen) # Save and Back to Main menü
+    EinstellungenWindow.btn_LoadConfig.clicked.connect(LoadConfig) # Save and Back to Main menü
+    EinstellungenWindow.btn_SaveConfig.clicked.connect(SaveConfig) # Save and Back to Main menü
 
     MainWindow.show() # main window öffnen
     MainWindow.activateWindow()
